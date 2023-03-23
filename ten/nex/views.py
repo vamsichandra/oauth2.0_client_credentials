@@ -74,10 +74,10 @@ def get_access_token(request):
         'client_secret': 'pbkdf2_sha256$320000$IUUBY1FaYeJl9oN1Ps6N2J$KL5A1/8++18WN06+pONdIqg9nI49bIhJ0eqR95NWauE='
     }
     response = requests.post(url, headers=headers, data=data)
-    #return response.json().get('access_token')
-    tt=response.json().get('access_token')
-    print(tt)
-    return JsonResponse(tt,safe=False)
+    return response.json().get('access_token')
+#     tt=response.json().get('access_token')
+#     print(tt)
+#     return JsonResponse(tt,safe=False)
 
 
 
@@ -88,8 +88,10 @@ def access_protected_view(request):
     # response1 = requests.get(client_credentials(request))
     # resx=response1.json().get('access_token')
     #print(resx)
+    tt=get_access_token(request)
+    print("this is from tt",tt)
     headers = {
-        'Authorization': f'Bearer abcdefghijklmnaop'
+        'Authorization': f'Bearer {tt}'
     }
     #response = requests.post(url, headers=headers)
     data = {
